@@ -410,111 +410,38 @@ button, input, textarea { max-width: 100%; }
 .image-frame.profile-unavailable::before { z-index: 4; }
 .image-frame.profile-unavailable::after { content: 'AA'; display: grid; place-items: center; width: 100%; height: 100%; position: absolute; inset: 0; color: transparent; font-size: clamp(64px, 9vw, 112px); font-weight: 800; letter-spacing: -.09em; background: linear-gradient(120deg, #f4fbff, var(--cyan) 55%, var(--violet)); background-clip: text; -webkit-background-clip: text; border: 0; pointer-events: none; }
 
-
-/* Hero portrait motion: subtle neon pulse, floating frame and moving orbit accents */
-@keyframes portraitFloat {
-  0%, 100% { transform: translateY(0) rotate(2deg); }
-  50% { transform: translateY(-9px) rotate(0deg); }
-}
-@keyframes orbitDriftOne {
-  from { transform: rotate(-25deg); }
-  to { transform: rotate(335deg); }
-}
-@keyframes orbitDriftTwo {
-  from { transform: rotate(47deg); }
-  to { transform: rotate(-313deg); }
-}
-@keyframes gridGlow {
-  0%, 100% { opacity: .45; filter: hue-rotate(0deg); }
-  50% { opacity: .9; filter: hue-rotate(35deg); }
-}
-@keyframes portraitGlow {
-  0%, 100% { box-shadow: 0 0 28px rgba(72,126,185,.14), 0 0 0 1px rgba(108,231,228,.08); }
-  50% { box-shadow: 0 0 48px rgba(108,120,255,.25), 0 0 28px rgba(255,92,168,.12), 0 0 0 1px rgba(154,121,255,.25); }
-}
-.hero-visual .image-frame {
-  animation: portraitFloat 6s ease-in-out infinite, portraitGlow 5s ease-in-out infinite;
-  will-change: transform, box-shadow;
-}
-.hero-visual .orbit-one { animation: orbitDriftOne 32s linear infinite; }
-.hero-visual .orbit-two { animation: orbitDriftTwo 38s linear infinite; }
-.hero-visual .visual-grid { animation: gridGlow 7s ease-in-out infinite; }
-.hero-visual::before {
-  content: "";
-  position: absolute;
-  width: 76%;
-  height: 76%;
-  border-radius: 50%;
-  background: conic-gradient(from 0deg, transparent 0 22%, rgba(108,231,228,.16) 30%, transparent 40%, rgba(154,121,255,.2) 55%, transparent 72%, rgba(255,92,168,.15) 86%, transparent);
-  filter: blur(28px);
-  animation: orbitDriftOne 24s linear infinite;
-  pointer-events: none;
-}
-.hero-visual .crosshair { animation: gridGlow 4s ease-in-out infinite; }
-
-/* On phones, show the portrait before the text; desktop keeps the original side-by-side layout. */
-@media (max-width: 900px) {
-  .hero { display: flex; flex-direction: column; align-items: stretch; }
-  .hero-visual { order: -1; flex: 0 0 auto; }
-  .hero-copy { order: 0; }
-  .hero .scroll-cue { order: 1; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero-visual .image-frame,
-  .hero-visual .orbit-one,
-  .hero-visual .orbit-two,
-  .hero-visual .visual-grid,
-  .hero-visual::before,
-  .hero-visual .crosshair { animation: none !important; }
-}
-
-/* Mobile horizontal overflow fix */
-html,
-body {
+/* Final mobile viewport and hero-order fix */
+html, body {
   width: 100%;
   max-width: 100%;
-  overflow-x: clip;
+  overflow-x: hidden;
 }
-
-img,
-video,
-iframe {
-  max-width: 100%;
-}
-
+body { position: relative; }
+*, *::before, *::after { box-sizing: border-box; }
+img, svg, video, canvas { max-width: 100%; }
 @media (max-width: 900px) {
-  .site-header {
-    max-width: 100%;
-  }
-
-  .hero,
-  .hero-copy,
-  .hero-visual,
-  .section-wrap,
-  .about-grid,
-  .section,
-  .contact-section,
-  .footer-main {
-    min-width: 0;
-    max-width: 100%;
-  }
-
-  .hero-visual {
+  .hero {
     width: 100%;
+    max-width: 100%;
+    grid-template-columns: minmax(0, 1fr);
     overflow: clip;
   }
-
-  .image-frame {
-    max-width: 80%;
-  }
-
-  .float-card {
-    max-width: calc(100% - 20px);
-  }
-
-  h1,
-  h2,
-  p {
-    overflow-wrap: anywhere;
-  }
+  .hero-visual { order: -1; min-width: 0; }
+  .hero-copy { order: 1; width: 100%; min-width: 0; }
+  .hero-copy, .hero-visual, .section-wrap, .section, .about-grid,
+  .contact-grid, .footer-main, .education-inner { min-width: 0; }
+  .site-header { max-width: 100%; }
+  .hero-visual { overflow: clip; }
+  .orbit, .crosshair { max-width: 100%; }
+  .card-top { right: 4px; }
+  .card-bottom { left: 4px; }
+  .hero-copy h1 { max-width: 100%; overflow-wrap: break-word; }
+}
+@media (max-width: 540px) {
+  .hero { padding-left: 0; padding-right: 0; }
+  .hero-visual { height: 320px; margin: 0 auto 8px; }
+  .image-frame { width: min(230px, 70vw); }
+  .hero-copy { padding-inline: 0; }
+  .hero-actions .btn { max-width: 100%; }
+  .section-wrap, .education-inner { width: calc(100% - 34px); }
 }
