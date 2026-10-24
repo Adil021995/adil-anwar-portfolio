@@ -445,3 +445,92 @@ img, svg, video, canvas { max-width: 100%; }
   .hero-actions .btn { max-width: 100%; }
   .section-wrap, .education-inner { width: calc(100% - 34px); }
 }
+
+/* Animated hero portrait and ambient background */
+.hero-visual {
+  isolation: isolate;
+}
+.visual-grid {
+  background-size: 32px 32px;
+  animation: heroGridDrift 18s linear infinite;
+  opacity: .72;
+}
+.image-frame {
+  animation: portraitFloat 5.5s ease-in-out infinite;
+  will-change: transform;
+}
+.image-frame img {
+  animation: portraitBreath 8s ease-in-out infinite;
+  transform-origin: center 38%;
+  will-change: transform, filter;
+}
+.orbit-one {
+  animation: orbitRotateOne 24s linear infinite;
+  will-change: transform;
+}
+.orbit-two {
+  animation: orbitRotateTwo 32s linear infinite;
+  will-change: transform;
+}
+.float-card.card-top {
+  animation: floatCardTop 4.8s ease-in-out infinite;
+}
+.float-card.card-bottom {
+  animation: floatCardBottom 5.6s ease-in-out infinite;
+}
+.hero-visual::before {
+  content: "";
+  position: absolute;
+  width: 72%;
+  height: 72%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(75,119,255,.17), rgba(154,121,255,.09) 42%, transparent 72%);
+  filter: blur(26px);
+  pointer-events: none;
+  z-index: 0;
+  animation: heroGlowPulse 6s ease-in-out infinite;
+}
+@keyframes portraitFloat {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -9px; }
+}
+@keyframes portraitBreath {
+  0%, 100% { scale: 1; filter: saturate(.88) brightness(1); }
+  50% { scale: 1.025; filter: saturate(1.05) brightness(1.035); }
+}
+@keyframes orbitRotateOne {
+  from { rotate: -25deg; }
+  to { rotate: 335deg; }
+}
+@keyframes orbitRotateTwo {
+  from { rotate: 47deg; }
+  to { rotate: 407deg; }
+}
+@keyframes heroGridDrift {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 32px 32px, 32px 32px; }
+}
+@keyframes floatCardTop {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -7px; }
+}
+@keyframes floatCardBottom {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 6px; }
+}
+@keyframes heroGlowPulse {
+  0%, 100% { opacity: .55; scale: .94; }
+  50% { opacity: 1; scale: 1.08; }
+}
+@media (max-width: 900px) {
+  .image-frame { animation-duration: 6s; }
+  .orbit-one { animation-duration: 30s; }
+  .orbit-two { animation-duration: 38s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .visual-grid, .image-frame, .image-frame img, .orbit-one, .orbit-two,
+  .float-card.card-top, .float-card.card-bottom, .hero-visual::before {
+    animation: none !important;
+    will-change: auto;
+  }
+}
