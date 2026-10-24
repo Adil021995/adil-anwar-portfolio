@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AA monogram logo">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6ce7e4"/><stop offset=".55" stop-color="#6f91ff"/><stop offset="1" stop-color="#9a79ff"/></linearGradient><filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<rect x="2" y="2" width="60" height="60" rx="14" fill="#0b111d" stroke="url(#g)" stroke-width="1.5"/>
+<path d="M13 45 23 18h5l10 27h-6l-2.2-6.5h-9.1L18.5 45z M22.3 33.7h6.1l-3-9z" fill="url(#g)" filter="url(#glow)"/>
+<path d="M32 45 42 18h5l10 27h-6l-2.2-6.5h-9.1L37.5 45z M41.3 33.7h6.1l-3-9z" fill="#eaf7ff"/>
+</svg>
