@@ -545,3 +545,22 @@ body{position:relative}
 img,svg,video,canvas{max-width:100%}
 @media(max-width:900px){.hero{width:100%;max-width:100%;grid-template-columns:minmax(0,1fr);overflow:clip}.hero-visual{order:-1;min-width:0}.hero-copy{order:1;width:100%;min-width:0}.hero-copy,.hero-visual,.section-wrap,.section,.about-grid,.contact-grid,.footer-main,.education-inner{min-width:0}.site-header{max-width:100%}.hero-visual{overflow:clip}.orbit,.crosshair{max-width:100%}.card-top{right:4px}.card-bottom{left:4px}.hero-copy h1{max-width:100%;overflow-wrap:break-word}}
 @media(max-width:540px){.hero{padding-left:0;padding-right:0}.hero-visual{height:320px;margin:0 auto 8px}.image-frame{width:min(230px,70vw)}.hero-copy{padding-inline:0}.hero-actions .btn{max-width:100%}.section-wrap,.education-inner{width:calc(100% - 34px)}}
+/* === UPDATED SKILLS ICONS + CONSISTENT RESPONSIVE CARDS === */
+.skill-grid-compact{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:stretch}
+.skill-grid-compact .skill-chip{position:relative;min-width:0;min-height:190px;height:190px;display:flex;flex-direction:column;align-items:flex-start;overflow:hidden;padding:20px;border:1px solid rgba(108,231,228,.17);border-radius:18px;background:linear-gradient(145deg,rgba(14,23,37,.96),rgba(8,13,24,.98));transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease}
+.skill-grid-compact .skill-chip::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 15% 0%,rgba(108,231,228,.12),transparent 58%);opacity:.75;pointer-events:none}
+.skill-grid-compact .skill-chip:hover{transform:translateY(-5px);border-color:rgba(108,231,228,.65);box-shadow:0 12px 34px rgba(0,0,0,.28),0 0 22px rgba(108,231,228,.12)}
+.skill-grid-compact .chip-index{position:absolute;right:15px;top:13px;font:11px var(--mono);letter-spacing:.08em;color:var(--dim)}
+.skill-grid-compact .chip-symbol{position:relative;display:flex;align-items:center;justify-content:center;width:54px;height:54px;flex:0 0 54px;margin:0 0 15px;border-radius:15px;background:rgba(108,231,228,.08);border:1px solid rgba(108,231,228,.15);color:var(--cyan);font-size:32px;line-height:1;transition:transform .28s ease,filter .28s ease}
+.skill-grid-compact .chip-symbol i{font-size:34px;line-height:1;filter:drop-shadow(0 0 7px rgba(108,231,228,.12))}
+.skill-grid-compact .skill-chip:hover .chip-symbol{transform:scale(1.07);filter:drop-shadow(0 0 10px rgba(108,231,228,.22))}
+.skill-grid-compact .chip-symbol .devicon-github-original{color:#eef3fb}
+.skill-grid-compact .skill-chip h3{position:relative;width:100%;min-width:0;margin:0 0 8px;font-size:15px;line-height:1.35;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.02em}
+.skill-grid-compact .chip-category{position:relative;display:block;max-width:100%;margin-top:auto;padding-top:2px;color:var(--muted);font-size:11px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.skill-mark{display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-weight:900;color:var(--cyan);font-family:var(--mono)}
+.skill-mark svg{width:31px;height:31px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.mark-testng{font-size:32px;font-style:italic;text-shadow:0 0 12px rgba(108,231,228,.35)}.mark-sql{font-size:17px;letter-spacing:-.08em}.mark-automation svg,.mark-ai svg{fill:rgba(108,231,228,.08)}
+@media(max-width:1000px){.skill-grid-compact{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){.skill-grid-compact{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.skill-grid-compact .skill-chip{height:166px;min-height:166px;padding:14px;border-radius:15px}.skill-grid-compact .chip-symbol{width:46px;height:46px;flex-basis:46px;margin-bottom:12px;border-radius:13px}.skill-grid-compact .chip-symbol i{font-size:29px}.skill-grid-compact .skill-chip h3{font-size:13px}.skill-grid-compact .chip-category{font-size:10px}.skill-grid-compact .chip-index{right:11px;top:10px;font-size:10px}}
+@media(prefers-reduced-motion:reduce){.skill-grid-compact .skill-chip,.skill-grid-compact .chip-symbol{transition:none}}
+
