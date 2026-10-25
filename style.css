@@ -514,3 +514,19 @@ img, svg, video, canvas { max-width: 100%; }
   .hero-actions .btn { max-width: 100%; }
   .section-wrap, .education-inner { width: calc(100% - 34px); }
 }
+
+
+/* Online Book Store selected screenshot gallery */
+.project-gallery{padding:0 22px 22px;border-top:1px solid var(--line);margin-top:2px;padding-top:18px}
+.gallery-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+.gallery-count{font:9px var(--mono);letter-spacing:.06em;color:var(--cyan);border:1px solid rgba(108,231,228,.25);border-radius:30px;padding:5px 8px;white-space:nowrap}
+.gallery-intro{font-size:11px;line-height:1.7;color:var(--dim);margin:0 0 14px}
+.project-screenshot-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.project-screenshot{display:block;min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:7px;background:rgba(255,255,255,.025);transition:transform .25s,border-color .25s,box-shadow .25s}
+.project-screenshot:hover{transform:translateY(-3px);border-color:rgba(108,231,228,.6);box-shadow:0 8px 24px rgba(0,0,0,.22)}
+.project-screenshot img{display:block;width:100%;height:94px;max-width:100%;object-fit:cover;object-position:top center;background:#111827;border-bottom:1px solid var(--line)}
+.project-screenshot>span{display:flex;align-items:center;gap:6px;padding:9px 8px;font:9px var(--mono);color:var(--dim)}
+.project-screenshot b{font:700 10px var(--font);color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.project-screenshot i{font-style:normal;color:var(--cyan);margin-left:auto}
+@media(max-width:700px){.project-gallery{padding:16px 17px 18px}.project-screenshot-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.project-screenshot img{height:100px}.gallery-intro{font-size:10px}}
+@media(max-width:380px){.project-screenshot-grid{gap:7px}.project-screenshot img{height:82px}.project-screenshot>span{padding:8px 6px}.project-screenshot b{font-size:9px}}
