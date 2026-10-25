@@ -530,3 +530,18 @@ img, svg, video, canvas { max-width: 100%; }
 .project-screenshot i{font-style:normal;color:var(--cyan);margin-left:auto}
 @media(max-width:700px){.project-gallery{padding:16px 17px 18px}.project-screenshot-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.project-screenshot img{height:100px}.gallery-intro{font-size:10px}}
 @media(max-width:380px){.project-screenshot-grid{gap:7px}.project-screenshot img{height:82px}.project-screenshot>span{padding:8px 6px}.project-screenshot b{font-size:9px}}
+
+
+/* Project cards stacked vertically, with full-width homepage previews */
+.project-grid-stacked{grid-template-columns:minmax(0,1fr);gap:26px}
+.project-grid-stacked .project-card{width:100%;min-width:0}
+.project-grid-stacked .project-homepage{aspect-ratio:2.15;max-height:480px}
+.project-grid-stacked .project-homepage img{object-fit:contain;object-position:center;background:#07111e}
+@media(max-width:700px){.project-grid-stacked .project-homepage{aspect-ratio:1.45;max-height:none}.project-grid-stacked .project-screenshot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* Final mobile viewport and hero-order fix retained */
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+body{position:relative}
+*,*::before,*::after{box-sizing:border-box}
+img,svg,video,canvas{max-width:100%}
+@media(max-width:900px){.hero{width:100%;max-width:100%;grid-template-columns:minmax(0,1fr);overflow:clip}.hero-visual{order:-1;min-width:0}.hero-copy{order:1;width:100%;min-width:0}.hero-copy,.hero-visual,.section-wrap,.section,.about-grid,.contact-grid,.footer-main,.education-inner{min-width:0}.site-header{max-width:100%}.hero-visual{overflow:clip}.orbit,.crosshair{max-width:100%}.card-top{right:4px}.card-bottom{left:4px}.hero-copy h1{max-width:100%;overflow-wrap:break-word}}
+@media(max-width:540px){.hero{padding-left:0;padding-right:0}.hero-visual{height:320px;margin:0 auto 8px}.image-frame{width:min(230px,70vw)}.hero-copy{padding-inline:0}.hero-actions .btn{max-width:100%}.section-wrap,.education-inner{width:calc(100% - 34px)}}
