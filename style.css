@@ -477,3 +477,40 @@ button, input, textarea { max-width: 100%; }
 .project-source-link:hover{background:rgba(108,231,228,.13);border-color:var(--cyan);transform:translateY(-2px);box-shadow:0 5px 20px rgba(108,231,228,.1)}
 .project-availability{font:9px var(--mono);letter-spacing:.08em;color:var(--dim)}
 @media(max-width:700px){.project-actions{padding:0 17px 18px;align-items:flex-start;flex-direction:column}.project-source-link{font-size:10px}}
+
+
+/* Mobile horizontal overflow fix restored from the earlier working portfolio version */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+body { position: relative; }
+*, *::before, *::after { box-sizing: border-box; }
+img, svg, video, canvas { max-width: 100%; }
+@media (max-width: 900px) {
+  .hero {
+    width: 100%;
+    max-width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    overflow: clip;
+  }
+  .hero-visual { order: -1; min-width: 0; }
+  .hero-copy { order: 1; width: 100%; min-width: 0; }
+  .hero-copy, .hero-visual, .section-wrap, .section, .about-grid,
+  .contact-grid, .footer-main, .education-inner { min-width: 0; }
+  .site-header { max-width: 100%; }
+  .hero-visual { overflow: clip; }
+  .orbit, .crosshair { max-width: 100%; }
+  .card-top { right: 4px; }
+  .card-bottom { left: 4px; }
+  .hero-copy h1 { max-width: 100%; overflow-wrap: break-word; }
+}
+@media (max-width: 540px) {
+  .hero { padding-left: 0; padding-right: 0; }
+  .hero-visual { height: 320px; margin: 0 auto 8px; }
+  .image-frame { width: min(230px, 70vw); }
+  .hero-copy { padding-inline: 0; }
+  .hero-actions .btn { max-width: 100%; }
+  .section-wrap, .education-inner { width: calc(100% - 34px); }
+}
