@@ -564,3 +564,10 @@ img,svg,video,canvas{max-width:100%}
 @media(max-width:650px){.skill-grid-compact{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.skill-grid-compact .skill-chip{height:166px;min-height:166px;padding:14px;border-radius:15px}.skill-grid-compact .chip-symbol{width:46px;height:46px;flex-basis:46px;margin-bottom:12px;border-radius:13px}.skill-grid-compact .chip-symbol i{font-size:29px}.skill-grid-compact .skill-chip h3{font-size:13px}.skill-grid-compact .chip-category{font-size:10px}.skill-grid-compact .chip-index{right:11px;top:10px;font-size:10px}}
 @media(prefers-reduced-motion:reduce){.skill-grid-compact .skill-chip,.skill-grid-compact .chip-symbol{transition:none}}
 
+
+/* Project title appears before its homepage preview */
+.project-name-heading{padding:24px 24px 15px;border-bottom:1px solid var(--line);background:linear-gradient(110deg,rgba(108,231,228,.055),transparent 65%)}
+.project-name-heading .project-type{display:block;font:9px var(--mono);letter-spacing:.1em;color:var(--cyan);margin-bottom:8px}
+.project-name-heading h3{font-size:clamp(20px,2.2vw,27px);line-height:1.3;letter-spacing:-.045em;margin:0;color:var(--text)}
+.project-info h3{display:none}
+@media(max-width:700px){.project-name-heading{padding:19px 17px 13px}.project-name-heading h3{font-size:20px}.project-name-heading .project-type{font-size:8px}}
