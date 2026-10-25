@@ -410,127 +410,70 @@ button, input, textarea { max-width: 100%; }
 .image-frame.profile-unavailable::before { z-index: 4; }
 .image-frame.profile-unavailable::after { content: 'AA'; display: grid; place-items: center; width: 100%; height: 100%; position: absolute; inset: 0; color: transparent; font-size: clamp(64px, 9vw, 112px); font-weight: 800; letter-spacing: -.09em; background: linear-gradient(120deg, #f4fbff, var(--cyan) 55%, var(--violet)); background-clip: text; -webkit-background-clip: text; border: 0; pointer-events: none; }
 
-/* Final mobile viewport and hero-order fix */
-html, body {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-}
-body { position: relative; }
-*, *::before, *::after { box-sizing: border-box; }
-img, svg, video, canvas { max-width: 100%; }
-@media (max-width: 900px) {
-  .hero {
-    width: 100%;
-    max-width: 100%;
-    grid-template-columns: minmax(0, 1fr);
-    overflow: clip;
-  }
-  .hero-visual { order: -1; min-width: 0; }
-  .hero-copy { order: 1; width: 100%; min-width: 0; }
-  .hero-copy, .hero-visual, .section-wrap, .section, .about-grid,
-  .contact-grid, .footer-main, .education-inner { min-width: 0; }
-  .site-header { max-width: 100%; }
-  .hero-visual { overflow: clip; }
-  .orbit, .crosshair { max-width: 100%; }
-  .card-top { right: 4px; }
-  .card-bottom { left: 4px; }
-  .hero-copy h1 { max-width: 100%; overflow-wrap: break-word; }
-}
-@media (max-width: 540px) {
-  .hero { padding-left: 0; padding-right: 0; }
-  .hero-visual { height: 320px; margin: 0 auto 8px; }
-  .image-frame { width: min(230px, 70vw); }
-  .hero-copy { padding-inline: 0; }
-  .hero-actions .btn { max-width: 100%; }
-  .section-wrap, .education-inner { width: calc(100% - 34px); }
-}
 
-/* Animated hero portrait and ambient background */
-.hero-visual {
-  isolation: isolate;
+/* Hero portrait motion: subtle neon pulse, floating frame and moving orbit accents */
+@keyframes portraitFloat {
+  0%, 100% { transform: translateY(0) rotate(2deg); }
+  50% { transform: translateY(-9px) rotate(0deg); }
 }
-.visual-grid {
-  background-size: 32px 32px;
-  animation: heroGridDrift 18s linear infinite;
-  opacity: .72;
+@keyframes orbitDriftOne {
+  from { transform: rotate(-25deg); }
+  to { transform: rotate(335deg); }
 }
-.image-frame {
-  animation: portraitFloat 5.5s ease-in-out infinite;
-  will-change: transform;
+@keyframes orbitDriftTwo {
+  from { transform: rotate(47deg); }
+  to { transform: rotate(-313deg); }
 }
-.image-frame img {
-  animation: portraitBreath 8s ease-in-out infinite;
-  transform-origin: center 38%;
-  will-change: transform, filter;
+@keyframes gridGlow {
+  0%, 100% { opacity: .45; filter: hue-rotate(0deg); }
+  50% { opacity: .9; filter: hue-rotate(35deg); }
 }
-.orbit-one {
-  animation: orbitRotateOne 24s linear infinite;
-  will-change: transform;
+@keyframes portraitGlow {
+  0%, 100% { box-shadow: 0 0 28px rgba(72,126,185,.14), 0 0 0 1px rgba(108,231,228,.08); }
+  50% { box-shadow: 0 0 48px rgba(108,120,255,.25), 0 0 28px rgba(255,92,168,.12), 0 0 0 1px rgba(154,121,255,.25); }
 }
-.orbit-two {
-  animation: orbitRotateTwo 32s linear infinite;
-  will-change: transform;
+.hero-visual .image-frame {
+  animation: portraitFloat 6s ease-in-out infinite, portraitGlow 5s ease-in-out infinite;
+  will-change: transform, box-shadow;
 }
-.float-card.card-top {
-  animation: floatCardTop 4.8s ease-in-out infinite;
-}
-.float-card.card-bottom {
-  animation: floatCardBottom 5.6s ease-in-out infinite;
-}
+.hero-visual .orbit-one { animation: orbitDriftOne 32s linear infinite; }
+.hero-visual .orbit-two { animation: orbitDriftTwo 38s linear infinite; }
+.hero-visual .visual-grid { animation: gridGlow 7s ease-in-out infinite; }
 .hero-visual::before {
   content: "";
   position: absolute;
-  width: 72%;
-  height: 72%;
+  width: 76%;
+  height: 76%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(75,119,255,.17), rgba(154,121,255,.09) 42%, transparent 72%);
-  filter: blur(26px);
+  background: conic-gradient(from 0deg, transparent 0 22%, rgba(108,231,228,.16) 30%, transparent 40%, rgba(154,121,255,.2) 55%, transparent 72%, rgba(255,92,168,.15) 86%, transparent);
+  filter: blur(28px);
+  animation: orbitDriftOne 24s linear infinite;
   pointer-events: none;
-  z-index: 0;
-  animation: heroGlowPulse 6s ease-in-out infinite;
 }
-@keyframes portraitFloat {
-  0%, 100% { translate: 0 0; }
-  50% { translate: 0 -9px; }
-}
-@keyframes portraitBreath {
-  0%, 100% { scale: 1; filter: saturate(.88) brightness(1); }
-  50% { scale: 1.025; filter: saturate(1.05) brightness(1.035); }
-}
-@keyframes orbitRotateOne {
-  from { rotate: -25deg; }
-  to { rotate: 335deg; }
-}
-@keyframes orbitRotateTwo {
-  from { rotate: 47deg; }
-  to { rotate: 407deg; }
-}
-@keyframes heroGridDrift {
-  from { background-position: 0 0, 0 0; }
-  to { background-position: 32px 32px, 32px 32px; }
-}
-@keyframes floatCardTop {
-  0%, 100% { translate: 0 0; }
-  50% { translate: 0 -7px; }
-}
-@keyframes floatCardBottom {
-  0%, 100% { translate: 0 0; }
-  50% { translate: 0 6px; }
-}
-@keyframes heroGlowPulse {
-  0%, 100% { opacity: .55; scale: .94; }
-  50% { opacity: 1; scale: 1.08; }
-}
+.hero-visual .crosshair { animation: gridGlow 4s ease-in-out infinite; }
+
+/* On phones, show the portrait before the text; desktop keeps the original side-by-side layout. */
 @media (max-width: 900px) {
-  .image-frame { animation-duration: 6s; }
-  .orbit-one { animation-duration: 30s; }
-  .orbit-two { animation-duration: 38s; }
+  .hero { display: flex; flex-direction: column; align-items: stretch; }
+  .hero-visual { order: -1; flex: 0 0 auto; }
+  .hero-copy { order: 0; }
+  .hero .scroll-cue { order: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .visual-grid, .image-frame, .image-frame img, .orbit-one, .orbit-two,
-  .float-card.card-top, .float-card.card-bottom, .hero-visual::before {
-    animation: none !important;
-    will-change: auto;
-  }
+  .hero-visual .image-frame,
+  .hero-visual .orbit-one,
+  .hero-visual .orbit-two,
+  .hero-visual .visual-grid,
+  .hero-visual::before,
+  .hero-visual .crosshair { animation: none !important; }
 }
+
+
+/* Online Book Store repository action */
+.project-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:0 22px 22px}
+.project-source-link{display:inline-flex;align-items:center;gap:10px;padding:10px 13px;border:1px solid rgba(108,231,228,.42);border-radius:4px;background:rgba(108,231,228,.07);color:var(--text);font-size:11px;font-weight:800;transition:background .25s,border-color .25s,transform .25s,box-shadow .25s}
+.project-source-link>span:first-child{font-size:16px;color:var(--cyan)}
+.project-source-link .source-arrow{color:var(--cyan);font-size:15px;margin-left:5px}
+.project-source-link:hover{background:rgba(108,231,228,.13);border-color:var(--cyan);transform:translateY(-2px);box-shadow:0 5px 20px rgba(108,231,228,.1)}
+.project-availability{font:9px var(--mono);letter-spacing:.08em;color:var(--dim)}
+@media(max-width:700px){.project-actions{padding:0 17px 18px;align-items:flex-start;flex-direction:column}.project-source-link{font-size:10px}}
