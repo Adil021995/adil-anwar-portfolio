@@ -605,3 +605,93 @@ img, svg, video, canvas { max-width: 100%; }
     animation: none !important; filter: none !important; transform: none !important;
   }
 }
+
+
+/* V3 — editorial wipe + scanner portrait (distinct motion style) */
+.hero-text-animated .eyebrow,
+.hero-text-animated .hero-intro,
+.hero-text-animated .hero-actions,
+.hero-text-animated .hero-meta { animation: v3SlideIn .7s cubic-bezier(.2,.8,.2,1) both; }
+.hero-text-animated .eyebrow { animation-delay:.12s; }
+.hero-text-animated .hero-intro { animation-delay:.52s; }
+.hero-text-animated .hero-actions { animation-delay:.68s; }
+.hero-text-animated .hero-meta { animation-delay:.82s; }
+.hero-text-animated h1 {
+  animation: v3TextWipe 1.25s cubic-bezier(.76,0,.24,1) .15s both;
+  clip-path: inset(0 100% 0 0);
+}
+.hero-text-animated h1 .outline-word { animation: v3OutlinePulse 3.2s ease-in-out 1.5s infinite; }
+.hero-text-animated h1 .gradient-text {
+  background-image: linear-gradient(90deg, var(--cyan) 0%, #f3f7ff 45%, var(--cyan) 52%, #a3a9ff 100%);
+  background-size: 250% 100%;
+  animation: v3TextShimmer 3.8s linear 1.2s infinite;
+}
+.hero-visual .image-frame {
+  animation: v3PortraitFloat 6s ease-in-out infinite;
+  border-radius: 24px;
+  isolation: isolate;
+  box-shadow: 0 18px 60px rgba(0,0,0,.4), 0 0 0 1px rgba(108,231,228,.25);
+}
+.hero-visual .image-frame img { animation: v3PortraitPan 11s ease-in-out infinite alternate; }
+.hero-visual .image-frame::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(180deg, transparent 0%, rgba(108,231,228,.0) 42%, rgba(108,231,228,.22) 50%, transparent 58%, transparent 100%);
+  background-size: 100% 240%;
+  animation: v3Scanner 5s ease-in-out infinite;
+  box-shadow: inset 0 0 0 1px rgba(108,231,228,.35);
+}
+@keyframes v3TextWipe { from { clip-path:inset(0 100% 0 0); transform:translateX(-8px); } to { clip-path:inset(0 0 0 0); transform:translateX(0); } }
+@keyframes v3SlideIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+@keyframes v3OutlinePulse { 0%,100% { -webkit-text-stroke-color:rgba(155,176,201,.65); } 50% { -webkit-text-stroke-color:#fff; text-shadow:0 0 18px rgba(255,255,255,.18); } }
+@keyframes v3TextShimmer { from { background-position:100% 50%; } to { background-position:-150% 50%; } }
+@keyframes v3PortraitFloat { 0%,100% { transform:translateY(0) rotate(0deg); } 50% { transform:translateY(-8px) rotate(.6deg); } }
+@keyframes v3PortraitPan { from { transform:scale(1.04) translateX(-1%); filter:saturate(.92); } to { transform:scale(1.12) translateX(1%); filter:saturate(1.12); } }
+@keyframes v3Scanner { 0%,100% { background-position:0 -100%; } 50% { background-position:0 100%; } }
+@media (prefers-reduced-motion: reduce) {
+ .hero-text-animated .eyebrow,.hero-text-animated h1,.hero-text-animated .hero-intro,.hero-text-animated .hero-actions,.hero-text-animated .hero-meta,.hero-text-animated h1 .outline-word,.hero-text-animated h1 .gradient-text,.hero-visual .image-frame,.hero-visual .image-frame img,.hero-visual .image-frame::after { animation:none!important; clip-path:none!important; filter:none!important; transform:none!important; }
+}
+
+/* V4 — smooth character-by-character typing and soft portrait drift */
+.hero-text-animated h1 {
+  clip-path: none !important;
+  animation: none !important;
+}
+.hero-text-animated h1 .typing-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity .16s ease, transform .22s cubic-bezier(.2,.7,.2,1);
+}
+.hero-text-animated h1 .typing-char.typed { opacity: 1; transform: translateY(0); }
+.hero-text-animated h1 .outline-word { animation: v4OutlineGlow 4.5s ease-in-out 1.8s infinite alternate !important; }
+.hero-text-animated h1 .gradient-text {
+  background-image: linear-gradient(100deg, var(--cyan), #f4f7ff 48%, #9fa8ff 70%, var(--cyan));
+  background-size: 220% 100%;
+  animation: v4GradientDrift 7s ease-in-out 1.8s infinite alternate !important;
+}
+.hero-visual .image-frame {
+  animation: v4ImageFloat 7.5s cubic-bezier(.45,0,.55,1) infinite !important;
+  box-shadow: 0 18px 55px rgba(0,0,0,.32), 0 0 0 1px rgba(108,231,228,.24), 0 0 28px rgba(108,231,228,.08) !important;
+}
+.hero-visual .image-frame img {
+  animation: v4ImageZoom 12s ease-in-out infinite alternate !important;
+}
+.hero-visual .image-frame::after {
+  background: linear-gradient(135deg, transparent 25%, rgba(108,231,228,.10) 50%, transparent 72%) !important;
+  background-size: 240% 240% !important;
+  animation: v4ImageSheen 8s ease-in-out infinite !important;
+}
+@keyframes v4ImageFloat { 0%,100% { transform: translate3d(0,0,0); } 50% { transform: translate3d(0,-10px,0); } }
+@keyframes v4ImageZoom { from { transform: scale(1.035); filter: saturate(.96); } to { transform: scale(1.085); filter: saturate(1.06); } }
+@keyframes v4ImageSheen { 0%,100% { background-position: 100% 100%; } 50% { background-position: 0 0; } }
+@keyframes v4OutlineGlow { from { -webkit-text-stroke-color: rgba(155,176,201,.68); } to { -webkit-text-stroke-color: var(--cyan); text-shadow: 0 0 15px rgba(108,231,228,.12); } }
+@keyframes v4GradientDrift { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+@media (prefers-reduced-motion: reduce) {
+ .hero-text-animated h1 .typing-char { opacity:1!important; transform:none!important; transition:none!important; }
+ .hero-visual .image-frame,.hero-visual .image-frame img,.hero-visual .image-frame::after { animation:none!important; transform:none!important; }
+}
