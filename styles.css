@@ -52,6 +52,7 @@
 @media(hover:none){.portrait-frame{transform:perspective(1100px) rotateX(1deg) rotateY(-2deg) rotateZ(1deg)}}
 @media(prefers-reduced-motion:reduce){.portrait-frame,.portrait-frame img,.portrait-frame:before,.portrait-frame .portrait-accent{will-change:auto;transition:none!important;animation:none!important}.portrait-frame{transform:none!important}.portrait-frame img,.portrait-frame .portrait-accent{transform:none!important}}
 
+
 /* 3D polish and clearer type for the floating quality cards */
 .float-card{position:absolute;transform-style:preserve-3d;perspective:700px;border-color:#45423d;transition:transform .42s cubic-bezier(.2,.75,.25,1),border-color .35s,box-shadow .4s,background .35s}
 .float-card:after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(112deg,transparent 18%,rgba(255,255,255,.12) 43%,transparent 64%);transform:translateX(-125%);transition:transform .7s cubic-bezier(.2,.75,.25,1)}
@@ -772,6 +773,23 @@
   .hero-summary{max-width:100%}
 }
 
+/* Keep mobile scrolling light by stopping decorative loops and expensive hover rendering */
+@media(max-width:760px), (hover:none) and (pointer:coarse){
+  .page-grain,.cursor-glow{display:none!important}
+  .orbit,.float-card,.portrait-frame,.scroll-wheel:after,.skill-card,.project-meta span:last-child{animation:none!important}
+  .portrait-frame{will-change:auto;filter:drop-shadow(0 16px 28px rgba(0,0,0,.42))}
+  .portrait-frame:before{mix-blend-mode:normal;opacity:.12}
+  .float-card{-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:0 7px 18px rgba(0,0,0,.24)}
+  .portrait-frame:hover,.portrait-frame:focus-within{transform:perspective(900px) rotateX(1deg) rotateY(-2deg) rotateZ(1deg);filter:drop-shadow(0 16px 28px rgba(0,0,0,.42))}
+  .portrait-frame:hover img,.portrait-frame:focus-within img{transform:translateZ(8px);filter:saturate(.86) contrast(1.04)}
+  .portrait-frame:hover .portrait-accent,.portrait-frame:focus-within .portrait-accent{transform:translateZ(-10px) rotate(-1deg);box-shadow:none}
+  .skill-card:hover,.education-item:hover,.experience-card:hover{transform:none!important;box-shadow:none!important}
+  .project-book .gallery-open:hover,.project-book .gallery-open:focus-visible,.project-medhome .gallery-open:hover,.project-medhome .gallery-open:focus-visible{transform:none!important;box-shadow:0 12px 24px rgba(0,0,0,.32)!important}
+  .project-book .gallery-open:hover img,.project-book .gallery-open:focus-visible img,.project-medhome .gallery-open:hover img,.project-medhome .gallery-open:focus-visible img{transform:none!important;filter:none!important}
+  .project-book .project-art:hover:after,.project-medhome .project-art:hover:after{transform:none!important;box-shadow:none!important}
+  .portrait-frame,.portrait-frame img,.portrait-frame:before,.portrait-frame .portrait-accent,.float-card,.skill-card,.education-item,.experience-card,.gallery-open{transition-duration:.2s!important}
+}
+
 /* Center contact icons with flex so inherited label-grid coordinates cannot offset them */
 .social-row .social-link{display:flex;align-items:center;justify-content:center;gap:0}
 .social-row .social-link>.social-brand-icon{grid-area:auto;grid-column:auto;grid-row:auto;align-self:center;justify-self:auto;flex:0 0 23px;margin:0}
@@ -780,4 +798,14 @@
 /* Reset the inherited three-column label layout so each icon centers in its square */
 .footer-connect .footer-link{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:0;justify-items:center;align-items:center}
 .footer-connect .footer-link svg{grid-area:auto;place-self:center;margin:0}
+
+/* Final touch-device overrides so no later desktop hover rule re-enables heavy effects */
+@media(max-width:760px), (hover:none) and (pointer:coarse){
+  .reveal{transition-duration:.35s!important}
+  .float-card:hover,.service-callout:hover,.project-detail-note:hover,.tech-tile:hover,.movate-logo-wrap:hover{transform:none!important;box-shadow:0 7px 18px rgba(0,0,0,.22)!important}
+  .float-card:hover .check-ring,.float-card:hover:after,.tech-tile:hover:before,.tech-tile:hover>i{animation:none!important;transform:none!important}
+  .service-callout:hover .service-symbol{transform:none!important;box-shadow:none!important}
+  .skill-card:hover:before,.skill-card:hover:after,.skill-card:hover .skill-icon,.skill-card:hover .skill-number,.education-item:hover:before,.education-item:hover:after,.experience-card:hover:before,.experience-card:hover:after,.experience-card:hover .movate-logo-wrap{animation:none!important;transform:none!important;box-shadow:none!important}
+  .project-art:hover:after{animation:none!important;filter:none!important}
+}
 
