@@ -790,6 +790,15 @@
   .portrait-frame,.portrait-frame img,.portrait-frame:before,.portrait-frame .portrait-accent,.float-card,.skill-card,.education-item,.experience-card,.gallery-open{transition-duration:.2s!important}
 }
 
+/* Stack the hero role beneath its introduction while keeping the typewriter cursor inline */
+.hero .role-line{display:flex;flex-direction:column;align-items:flex-start;gap:4px;width:100%;max-width:100%;min-width:0;margin-top:7px}
+.hero .role-prefix{font:500 12px/1.35 var(--mono);letter-spacing:.08em;color:#aaa7a0}
+.hero .role-output{display:block;max-width:100%;min-width:0;color:var(--accent-soft);font-size:clamp(17px,2vw,22px);font-weight:650;line-height:1.4;letter-spacing:-.035em}
+.hero .role-word{display:inline;max-width:100%;min-width:0;white-space:normal;overflow-wrap:anywhere;color:#ff6a4b}
+.hero .role-output .cursor{display:inline-block;width:2px;height:1.1em;margin-left:2px;vertical-align:-.12em;background:var(--accent);animation:blink 1s step-end infinite}
+@media(max-width:760px){.hero .role-line{gap:5px;margin-top:9px}.hero .role-prefix{font-size:11px}.hero .role-output{font-size:clamp(16px,4.4vw,19px);line-height:1.45}}
+@media(prefers-reduced-motion:reduce){.hero .role-output .cursor{animation:none!important;opacity:1}}
+
 /* Center contact icons with flex so inherited label-grid coordinates cannot offset them */
 .social-row .social-link{display:flex;align-items:center;justify-content:center;gap:0}
 .social-row .social-link>.social-brand-icon{grid-area:auto;grid-column:auto;grid-row:auto;align-self:center;justify-self:auto;flex:0 0 23px;margin:0}
