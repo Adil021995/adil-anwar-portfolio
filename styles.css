@@ -850,10 +850,12 @@
 /* Mobile atmosphere and a gentle always-on portrait float (never hover-triggered) */
 @keyframes mobilePortraitFloat{0%,100%{translate:0 0}50%{translate:0 -5px}}
 @media(max-width:760px){
-  body{background-color:#111110;background-image:radial-gradient(ellipse at 8% 5%,rgba(252,48,3,.15),transparent 35%),radial-gradient(ellipse at 95% 100%,rgba(252,48,3,.08),transparent 38%),linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(135deg,#1a1917,#111110 70%);background-size:auto,auto,36px 36px,36px 36px,auto}
+  body{background-color:#111110;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(135deg,#1a1917,#111110 70%);background-size:36px 36px,36px 36px,auto}
   .hero{padding-top:36px}
 }
 @media(max-width:760px) and (prefers-reduced-motion:no-preference){.hero .portrait-frame{animation:mobilePortraitFloat 7s ease-in-out infinite!important}}
+@keyframes mobileAccentFloat{0%,100%{translate:0 0}50%{translate:0 7px}}
+@media(max-width:760px) and (prefers-reduced-motion:no-preference){.hero .portrait-frame .portrait-accent{animation:mobileAccentFloat 8s ease-in-out infinite!important}}
 
 /* Center contact icons with flex so inherited label-grid coordinates cannot offset them */
 .social-row .social-link{display:flex;align-items:center;justify-content:center;gap:0}
