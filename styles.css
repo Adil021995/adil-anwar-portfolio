@@ -941,11 +941,10 @@
 }
 @media(prefers-reduced-motion:reduce){.service-band .service-envelope path{transition:none!important}}
 
-/* Keep the desktop contact card free of the former orange ambience */
-@media(min-width:761px){
-  .contact-card{background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(135deg,#1a1917,#111110 70%);background-size:36px 36px,36px 36px,auto;box-shadow:0 24px 70px rgba(0,0,0,.32),inset 0 1px rgba(255,255,255,.05)}
-  .contact-card:before,.contact-card:after{display:none}
-}
+/* Keep the contact card free of the orange ambient glow on every viewport */
+.contact-card{background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(135deg,#1a1917,#111110 70%);background-size:36px 36px,36px 36px,auto;box-shadow:0 24px 70px rgba(0,0,0,.32),inset 0 1px rgba(255,255,255,.05)}
+.contact-card:before,.contact-card:after{display:none}
+.contact-card .contact-form{box-shadow:0 16px 38px rgba(0,0,0,.26)}
 
 /* Remove the card's hover lift and ambient orange wash, but keep its icon and CTA interactions */
 .service-band .service-callout{background:radial-gradient(ellipse at 88% 0%,rgba(255,255,255,.04),transparent 38%),linear-gradient(125deg,#1c1b19,#131312 72%)}
@@ -985,14 +984,16 @@
 .brand-emblem-frame{stroke:var(--accent);stroke-width:1.7}
 .brand-emblem-a{stroke:#f3f0e9;stroke-width:3}
 .brand-copy{display:flex;min-width:0;max-width:255px;flex-direction:column;align-items:flex-start;justify-content:center;gap:2px;line-height:1.15}
-.brand-copy .brand-name{display:block;font-size:19px;font-weight:800;letter-spacing:-.55px;color:var(--text);white-space:nowrap;transition:color .3s,text-shadow .35s}
+.brand-copy .brand-name{display:block;font-family:var(--sans);font-size:19px;font-weight:800;letter-spacing:-.55px;line-height:1;color:#f5f1e9;white-space:nowrap;text-shadow:0 0 12px rgba(252,48,3,.12);transition:color .3s,text-shadow .35s}
+.brand-initial{color:#ff5734;text-shadow:0 0 7px rgba(252,48,3,.5)}
 .footer-top .brand-copy .brand-name{font-size:21px}
 @media(hover:hover) and (pointer:fine){
   .brand:hover .brand-mark,.brand:focus-visible .brand-mark{transform:translateY(-2px);border-color:#ff684a;box-shadow:0 0 0 1px rgba(252,48,3,.34),0 0 27px rgba(252,48,3,.48),0 0 48px rgba(252,48,3,.2),inset 0 0 18px rgba(255,100,70,.16)}
   .brand:hover .brand-mark:after,.brand:focus-visible .brand-mark:after{clip-path:inset(0)}
   .brand:hover .brand-emblem,.brand:focus-visible .brand-emblem{transform:scale(1.055);filter:drop-shadow(0 0 5px rgba(255,255,255,.7)) drop-shadow(0 0 12px rgba(252,48,3,.95))}
   .brand:hover .brand-emblem-a,.brand:focus-visible .brand-emblem-a{stroke:#fff}
-  .brand:hover .brand-name,.brand:focus-visible .brand-name{color:#fff;text-shadow:0 0 9px rgba(252,48,3,.7)}
+  .brand:hover .brand-name,.brand:focus-visible .brand-name{color:#fff;letter-spacing:-.72px;text-shadow:0 0 10px rgba(252,48,3,.72),0 0 22px rgba(252,48,3,.32)}
+  .brand:hover .brand-initial,.brand:focus-visible .brand-initial{text-shadow:0 0 10px #fc3003,0 0 20px rgba(252,48,3,.9)}
 }
 @media(hover:none),(pointer:coarse){
   .brand .brand-mark{border-color:rgba(252,48,3,.78);box-shadow:0 0 21px rgba(252,48,3,.3),0 0 36px rgba(252,48,3,.12),inset 0 0 16px rgba(252,48,3,.08)}
@@ -1023,4 +1024,60 @@
 }
 @media(max-width:380px){.site-header .brand-copy{max-width:calc(100vw - 128px)}}
 @media(prefers-reduced-motion:reduce){.brand .brand-mark,.brand .brand-mark:after,.brand-emblem,.brand-name{transition:none!important}}
+
+/* Tablet-only layout tuning: tighten the hero, about highlights, and project controls */
+@media(min-width:761px) and (max-width:1024px){
+  .hero{grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:clamp(14px,2vw,24px);min-height:590px;padding-top:38px;padding-bottom:72px}
+  .hero-copy{min-width:0;width:100%;padding-bottom:8px}
+  .hero-greeting{font-size:14px}
+  .hero h1{font-size:clamp(50px,6.4vw,68px);margin-bottom:14px}
+  .hero .role-line{gap:7px;font-size:12px;flex-wrap:wrap}
+  .hero .role-output,.hero .role-word{font-size:12px}
+  .hero-summary{max-width:100%;font-size:12px;line-height:1.75;margin:18px 0 20px}
+  .hero-actions{gap:9px}
+  .hero-actions .button{height:42px;padding-inline:14px;font-size:10px;gap:12px}
+  .hero-visual{height:430px;transform:scale(.9);transform-origin:center}
+  .portrait-frame{width:min(290px,68%);height:360px}
+  .about-tags{display:grid;grid-template-columns:max-content max-content;justify-content:start;align-items:start;gap:7px;width:max-content;max-width:100%;margin-top:18px}
+  .about-tags span{padding:7px 10px;font-size:9px}
+  .about-tags span:nth-child(3){grid-column:1/-1;justify-self:start;width:max-content;max-width:100%;font-size:9px;padding:7px 10px}
+  .project-tags.tech-stack{grid-template-columns:repeat(7,minmax(0,62px));gap:8px;width:max-content;max-width:100%;margin:17px 0 19px}
+  .project-tags.tech-stack .tech-tile{gap:7px;padding:8px 5px}
+  .project-tags.tech-stack .tech-tile>i{font-size:29px}
+  .project-tags.tech-stack .tech-tile>b{font-size:9px}
+  .project-tags.tech-stack .tech-ai-icon,.project-tags.tech-stack .tech-xampp-icon{width:27px;height:27px}
+  .book-project-links{gap:8px;margin-top:17px;padding-top:14px}
+  .book-project-links .project-action{min-height:40px;padding-inline:12px;gap:9px;font-size:10px}
+}
+
+/* Tablet-specific refinements requested for the hero, filters, form, and page backdrop */
+@media(min-width:761px) and (max-width:1024px){
+  body{background-color:#111110;background-image:radial-gradient(ellipse at 14% 8%,rgba(252,48,3,.045),transparent 31%),radial-gradient(ellipse at 88% 76%,rgba(112,127,137,.075),transparent 38%),linear-gradient(135deg,transparent 0 47%,rgba(255,255,255,.018) 47.15%,transparent 47.4%),radial-gradient(circle at 1px 1px,rgba(255,255,255,.027) 1px,transparent 1.4px),linear-gradient(135deg,#181715,#111110 58%,#151514);background-size:auto,auto,auto,30px 30px,auto;background-attachment:fixed}
+  .primary-nav .nav-link{font-size:11px}
+  .primary-nav .nav-cv{font-size:10px}
+  .hero-visual{height:410px;transform:scale(.88)}
+  .visual-grid{width:375px;height:375px}
+  .orbit-one{width:370px;height:370px}
+  .orbit-two{width:300px;height:430px}
+  .portrait-frame{width:min(260px,64%);height:330px}
+  .float-card{gap:8px;padding:9px 10px}
+  .float-card small{font-size:7px;letter-spacing:.8px}
+  .float-card strong{font-size:10px}
+  .float-icon{font-size:14px}
+  .check-ring{width:20px;height:20px;font-size:11px}
+  .about-tags{display:none!important}
+  .skill-tabs{gap:4px;margin-bottom:17px}
+  .skill-tab{padding:6px 8px;font-size:8px}
+  .skill-tab span{font-size:7px;margin-left:4px}
+  .contact-card{grid-template-columns:minmax(0,.92fr) minmax(0,1fr);gap:22px;padding:clamp(22px,3vw,32px)}
+  .contact-card .contact-form{gap:12px;padding:18px}
+  .form-heading{padding-bottom:12px}
+  .form-heading h3{font-size:21px;margin:8px 0 4px}
+  .form-heading p{font-size:10px}
+  .contact-form label{font-size:10px}
+  .contact-form input,.contact-form textarea,.contact-form select{font-size:11px;padding:10px 11px;margin-top:5px}
+  .contact-form input::placeholder,.contact-form textarea::placeholder{font-size:10px}
+  .contact-form textarea{min-height:92px}
+  .form-submit{min-width:132px;min-height:40px;padding-inline:14px;font-size:10px}
+}
 
