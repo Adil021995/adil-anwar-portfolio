@@ -840,6 +840,13 @@
   .service-band .service-button i{font-size:14px}
 }
 
+/* Mobile-only hero order and gallery-cover copy cleanup */
+@media(max-width:760px){
+  .hero .hero-visual{grid-row:1;margin-top:0}
+  .hero .hero-copy{grid-row:2}
+  .project-book .gallery-cover-label strong,.project-medhome .gallery-cover-label strong{display:none!important}
+}
+
 /* Center contact icons with flex so inherited label-grid coordinates cannot offset them */
 .social-row .social-link{display:flex;align-items:center;justify-content:center;gap:0}
 .social-row .social-link>.social-brand-icon{grid-area:auto;grid-column:auto;grid-row:auto;align-self:center;justify-self:auto;flex:0 0 23px;margin:0}
