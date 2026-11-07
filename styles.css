@@ -38,17 +38,19 @@
 
 
 
-/* Smooth interactive 3D depth for Adil's portrait */
-.portrait-frame{transform-style:preserve-3d;transform:perspective(900px) rotateX(calc(2deg + var(--portrait-tilt-x,0deg))) rotateY(calc(-4deg + var(--portrait-tilt-y,0deg))) rotateZ(2deg) translateZ(0);transition:transform .38s cubic-bezier(.2,.75,.25,1),filter .55s;will-change:transform}
-.portrait-frame:hover{transform:perspective(900px) rotateX(calc(2deg + var(--portrait-tilt-x,0deg))) rotateY(calc(-4deg + var(--portrait-tilt-y,0deg))) rotateZ(0deg) translateZ(15px) scale(1.02);filter:drop-shadow(0 34px 72px rgba(0,0,0,.58))}
-.portrait-frame img{transform:translateZ(8px);transition:transform .55s cubic-bezier(.2,.75,.25,1),filter .55s}
-.portrait-frame:hover img{transform:translateZ(15px);filter:saturate(.9) contrast(1.08)}
-.portrait-frame:before{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;transform:translateZ(18px);opacity:.16;background:radial-gradient(circle at var(--portrait-light-x,48%) var(--portrait-light-y,34%),rgba(255,255,255,.3),transparent 45%),linear-gradient(130deg,rgba(255,255,255,.1),transparent 35%,transparent 68%,rgba(252,48,3,.12));transition:opacity .4s}
-.portrait-frame:hover:before{opacity:.35}
-.portrait-frame .portrait-label{z-index:4;transform:translateZ(22px)}
-.portrait-frame .portrait-accent{transform:translateZ(-10px) rotate(-1deg);transition:transform .55s cubic-bezier(.2,.75,.25,1),box-shadow .55s}
-.portrait-frame:hover .portrait-accent{transform:translateZ(-14px) translateX(-4px) translateY(4px) rotate(-2deg);box-shadow:0 0 28px rgba(252,48,3,.14)}
-@media(prefers-reduced-motion:reduce){.portrait-frame,.portrait-frame img,.portrait-frame:before,.portrait-frame .portrait-accent{will-change:auto;transition:none!important}}
+/* Pointer-reactive 3D portrait: floating glass plane, parallax layers, and a moving light sheen */
+.hero-visual{perspective:1100px;perspective-origin:50% 46%}
+.portrait-frame{transform-style:preserve-3d;transform-origin:center;transform:perspective(1100px) rotateX(var(--portrait-tilt-x,0deg)) rotateY(var(--portrait-tilt-y,0deg)) rotateZ(1deg) translateZ(0);transition:transform .32s cubic-bezier(.2,.75,.25,1),filter .45s;will-change:transform}
+.portrait-frame img{transform:translateZ(10px);transition:transform .48s cubic-bezier(.2,.75,.25,1),filter .45s}
+.portrait-frame:before{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;transform:translateZ(20px);opacity:.15;background:radial-gradient(circle at var(--portrait-light-x,50%) var(--portrait-light-y,35%),rgba(255,255,255,.34),transparent 38%),linear-gradient(125deg,rgba(255,255,255,.12),transparent 32%,transparent 66%,rgba(252,48,3,.17));mix-blend-mode:screen;transition:opacity .35s}
+.portrait-frame .portrait-label{z-index:4;transform:translateZ(28px)}
+.portrait-frame .portrait-accent{transform:translateZ(-12px) rotate(-1deg);transition:transform .5s cubic-bezier(.2,.75,.25,1),box-shadow .5s}
+.portrait-frame:hover,.portrait-frame:focus-within{transform:perspective(1100px) rotateX(calc(6deg + var(--portrait-tilt-x,0deg))) rotateY(calc(-7deg + var(--portrait-tilt-y,0deg))) rotateZ(-1deg) translateZ(26px) scale(1.035);filter:drop-shadow(0 36px 72px rgba(0,0,0,.6)) drop-shadow(0 0 18px rgba(252,48,3,.15))}
+.portrait-frame:hover img,.portrait-frame:focus-within img{transform:translateZ(24px) scale(1.025);filter:saturate(1.04) contrast(1.07)}
+.portrait-frame:hover:before,.portrait-frame:focus-within:before{opacity:.48}
+.portrait-frame:hover .portrait-accent,.portrait-frame:focus-within .portrait-accent{transform:translateZ(-18px) translateX(-7px) translateY(7px) rotate(-2deg);box-shadow:0 0 32px rgba(252,48,3,.23)}
+@media(hover:none){.portrait-frame{transform:perspective(1100px) rotateX(1deg) rotateY(-2deg) rotateZ(1deg)}}
+@media(prefers-reduced-motion:reduce){.portrait-frame,.portrait-frame img,.portrait-frame:before,.portrait-frame .portrait-accent{will-change:auto;transition:none!important;animation:none!important}.portrait-frame{transform:none!important}.portrait-frame img,.portrait-frame .portrait-accent{transform:none!important}}
 
 /* 3D polish and clearer type for the floating quality cards */
 .float-card{position:absolute;transform-style:preserve-3d;perspective:700px;border-color:#45423d;transition:transform .42s cubic-bezier(.2,.75,.25,1),border-color .35s,box-shadow .4s,background .35s}
@@ -761,13 +763,14 @@
 @media(max-width:760px){.service-band .service-button{min-width:154px;min-height:44px}}
 @media(max-width:500px){.service-band .service-button{width:fit-content;min-width:0;min-height:42px;padding:9px 11px;font-size:11px}}
 
-/* Make the portrait's hover depth visibly distinct from its resting pose */
-.hero-visual{perspective:850px}
-.portrait-frame{transform-style:preserve-3d;backface-visibility:visible;transition:transform .55s cubic-bezier(.2,.75,.25,1),filter .55s;}
-.portrait-frame:hover,.portrait-frame:focus-within{transform:perspective(850px) rotateX(7deg) rotateY(-9deg) rotateZ(0deg) translateZ(28px) scale(1.04);filter:drop-shadow(0 38px 78px rgba(0,0,0,.64)) drop-shadow(0 0 20px rgba(252,48,3,.12))}
-.portrait-frame:hover img,.portrait-frame:focus-within img{transform:translateZ(26px) scale(1.025);filter:saturate(1.02) contrast(1.08)}
-.portrait-frame:hover .portrait-accent,.portrait-frame:focus-within .portrait-accent{transform:translateZ(-18px) translateX(-8px) translateY(8px) rotate(-3deg);box-shadow:0 0 32px rgba(252,48,3,.2)}
-.portrait-frame:hover:before,.portrait-frame:focus-within:before{opacity:.4}
+/* Prevent the animated hero role from forcing a wider mobile grid track */
+@media(max-width:760px){
+  .hero{grid-template-columns:minmax(0,1fr)}
+  .hero-copy{min-width:0;width:100%}
+  .role-line{width:100%;max-width:100%;min-width:0;flex-wrap:wrap;row-gap:3px}
+  .role-word{min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+  .hero-summary{max-width:100%}
+}
 
 /* Center contact icons with flex so inherited label-grid coordinates cannot offset them */
 .social-row .social-link{display:flex;align-items:center;justify-content:center;gap:0}
