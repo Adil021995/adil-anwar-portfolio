@@ -799,6 +799,47 @@
 @media(max-width:760px){.hero .role-line{gap:5px;margin-top:9px}.hero .role-prefix{font-size:11px}.hero .role-output{font-size:clamp(16px,4.4vw,19px);line-height:1.45}}
 @media(prefers-reduced-motion:reduce){.hero .role-output .cursor{animation:none!important;opacity:1}}
 
+/* Restore the original desktop role row; mobile-only project and callout refinements */
+.hero .role-line{display:flex;flex-direction:row;align-items:center;gap:9px;width:auto;max-width:none;margin-top:0;flex-wrap:nowrap}
+.hero .role-prefix{font:inherit;letter-spacing:normal;color:inherit}
+.hero .role-output{display:inline-flex;align-items:baseline;max-width:none;min-width:0;white-space:nowrap;color:inherit;font:inherit;font-weight:inherit;line-height:inherit;letter-spacing:normal}
+.hero .role-word{display:inline;min-width:0;max-width:none;white-space:inherit;overflow-wrap:normal;color:var(--accent-soft);font:inherit;letter-spacing:inherit}
+.hero .role-output .cursor{display:inline-block;flex:0 0 1px;width:1px;height:17px;margin:0;vertical-align:baseline}
+
+@media(max-width:760px){
+  /* Keep only the role layout change on mobile; retain its original typewriter styling */
+  .hero .role-line{flex-direction:column;align-items:flex-start;gap:4px;width:100%;max-width:100%;min-width:0;margin-top:7px;flex-wrap:wrap}
+  .hero .role-prefix{font:inherit;letter-spacing:normal;color:inherit}
+  .hero .role-output{display:block;max-width:100%;min-width:0;white-space:normal;color:inherit;font:inherit;line-height:inherit;letter-spacing:normal}
+  .hero .role-word{display:inline;max-width:100%;min-width:0;white-space:normal;overflow-wrap:anywhere;color:var(--accent-soft);font:inherit;letter-spacing:normal}
+  .hero .role-output .cursor{display:inline-block;width:1px;height:17px;margin-left:1px;vertical-align:baseline}
+
+  .about-tags{display:none!important}
+
+  /* Project screenshots span the card; gallery prompt sits beneath each image */
+  .project-book .project-art,.project-medhome .project-art{display:block;width:100%;height:auto;min-height:0;aspect-ratio:auto;padding:0;overflow:hidden}
+  .project-book .project-art .gallery-open,.project-medhome .project-art .gallery-open{position:relative;inset:auto;display:flex;flex-direction:column;align-items:stretch;width:100%;height:auto;max-width:none;max-height:none;aspect-ratio:auto;margin:0;padding:0;border:0;transform:none!important;box-shadow:none!important;overflow:hidden}
+  .project-book .project-art .gallery-open>img,.project-medhome .project-art .gallery-open>img{display:block;width:100%;height:auto;aspect-ratio:2.05/1;object-fit:cover;transform:none!important;filter:none!important}
+  .project-book .gallery-cover-label,.project-medhome .gallery-cover-label{position:static;inset:auto;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:8px;width:100%;padding:12px;background:linear-gradient(110deg,#1b1917,#141413);transform:none!important}
+  .project-book .gallery-cover-label>b,.project-medhome .gallery-cover-label>b{flex:none;padding:5px 7px;font-size:6px;letter-spacing:.4px;backdrop-filter:none;transform:none!important}
+  .project-book .screenshot-count,.project-medhome .screenshot-count{top:9px;right:9px;padding:5px 6px;font-size:6px;backdrop-filter:none}
+
+  /* Show the existing technology marks without their tile boxes or captions */
+  .project-card .project-tags.tech-stack{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:16px 0 18px}
+  .project-card .project-tags.tech-stack .tech-tile{display:grid;place-items:center;flex:0 0 30px;width:30px;height:32px;min-width:30px;aspect-ratio:auto;gap:0;padding:0;border:0!important;background:transparent!important;box-shadow:none!important;overflow:visible;color:inherit}
+  .project-card .project-tags.tech-stack .tech-tile>b{display:none}
+  .project-card .project-tags.tech-stack .tech-tile>i{font-size:26px;line-height:1}
+  .project-card .project-tags.tech-stack .tech-xampp-icon,.project-card .project-tags.tech-stack .tech-ai-icon{width:25px;height:25px;transform:none!important;filter:none!important}
+  .project-card .project-tags.tech-stack .tech-tile:before,.project-card .project-tags.tech-stack .tech-tile:after{display:none!important;animation:none!important}
+
+  /* Align the student-project mark at top left and compact its CTA */
+  .service-band .service-callout{grid-template-columns:36px minmax(0,1fr);align-items:start}
+  .service-band .service-symbol{grid-column:1;grid-row:1;align-self:start;margin-top:2px}
+  .service-band .service-callout>div:nth-child(2){grid-column:2;grid-row:1}
+  .service-band .service-button{grid-column:2;justify-self:start;width:fit-content;min-width:0;min-height:36px;padding:7px 10px;gap:8px;font-size:10px}
+  .service-band .service-button i{font-size:14px}
+}
+
 /* Center contact icons with flex so inherited label-grid coordinates cannot offset them */
 .social-row .social-link{display:flex;align-items:center;justify-content:center;gap:0}
 .social-row .social-link>.social-brand-icon{grid-area:auto;grid-column:auto;grid-row:auto;align-self:center;justify-self:auto;flex:0 0 23px;margin:0}
