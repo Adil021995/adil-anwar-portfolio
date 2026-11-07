@@ -876,3 +876,14 @@
   .project-art:hover:after{animation:none!important;filter:none!important}
 }
 
+/* Mobile-only orbit motion and evenly aligned experience chips */
+@keyframes mobileOrbitRotate{from{rotate:0deg}to{rotate:360deg}}
+@media(max-width:760px) and (prefers-reduced-motion:no-preference){
+  .hero .hero-visual .orbit-one{animation:mobileOrbitRotate 48s linear infinite!important}
+  .hero .hero-visual .orbit-two{animation:mobileOrbitRotate 64s linear infinite!important}
+}
+@media(max-width:760px){
+  .experience-card .experience-skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .experience-card .experience-skills span{width:100%;min-width:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px 5px;font-size:8px;line-height:1.35}
+}
+
