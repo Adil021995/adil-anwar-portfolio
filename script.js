@@ -280,3 +280,93 @@ if (medhomeGalleryDialog) {
     if (event.key === 'ArrowLeft') showSlide(index - 1, -1);
   });
 }
+
+// Give the hero portrait a smooth pointer-driven 3D lean on precise-pointer devices.
+const portraitStage = document.querySelector('.hero-visual');
+const portraitFrame = document.querySelector('.portrait-frame');
+const portraitCanTilt = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+const portraitReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (portraitStage && portraitFrame && portraitCanTilt && !portraitReducedMotion) {
+  let tiltFrame = 0;
+  let pendingTilt = null;
+
+  portraitStage.addEventListener('pointermove', (event) => {
+    const bounds = portraitStage.getBoundingClientRect();
+    if (!bounds.width || !bounds.height) return;
+
+    const x = (event.clientX - bounds.left) / bounds.width;
+    const y = (event.clientY - bounds.top) / bounds.height;
+    pendingTilt = {
+      x: ((x - 0.5) * 10).toFixed(2),
+      y: ((0.5 - y) * 8).toFixed(2),
+      lightX: `${(x * 100).toFixed(1)}%`,
+      lightY: `${(y * 100).toFixed(1)}%`
+    };
+
+    if (!tiltFrame) {
+      tiltFrame = requestAnimationFrame(() => {
+        portraitFrame.style.setProperty('--portrait-tilt-x', `${pendingTilt.y}deg`);
+        portraitFrame.style.setProperty('--portrait-tilt-y', `${pendingTilt.x}deg`);
+        portraitFrame.style.setProperty('--portrait-light-x', pendingTilt.lightX);
+        portraitFrame.style.setProperty('--portrait-light-y', pendingTilt.lightY);
+        tiltFrame = 0;
+      });
+    }
+  }, { passive: true });
+
+  portraitStage.addEventListener('pointerleave', () => {
+    portraitFrame.style.setProperty('--portrait-tilt-x', '0deg');
+    portraitFrame.style.setProperty('--portrait-tilt-y', '0deg');
+    portraitFrame.style.setProperty('--portrait-light-x', '50%');
+    portraitFrame.style.setProperty('--portrait-light-y', '35%');
+  }, { passive: true });
+}
+
+// Submit the contact form through FormSubmit's AJAX endpoint so the visitor
+// stays on this page instead of being sent through its default thank-you route.
+const contactForm = document.querySelector('.contact-form');
+if (contactForm) {
+  const formStatus = contactForm.querySelector('.form-status');
+  const submitButton = contactForm.querySelector('[type="submit"]');
+  const originalButtonMarkup = submitButton?.innerHTML;
+  const ajaxEndpoint = contactForm.dataset.ajaxEndpoint;
+
+  contactForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!contactForm.reportValidity() || !formStatus || !submitButton || !ajaxEndpoint) return;
+
+    formStatus.hidden = false;
+    formStatus.dataset.state = 'sending';
+    formStatus.textContent = 'Sending your message…';
+    submitButton.disabled = true;
+    submitButton.innerHTML = 'Sending…';
+    contactForm.setAttribute('aria-busy', 'true');
+
+    try {
+      const response = await fetch(ajaxEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(Object.fromEntries(new FormData(contactForm).entries()))
+      });
+      const result = await response.json();
+      if (!response.ok || String(result.success).toLowerCase() !== 'true') {
+        throw new Error(result.message || 'The form service could not accept your message.');
+      }
+
+      contactForm.reset();
+      formStatus.dataset.state = 'success';
+      formStatus.textContent = 'Message submitted successfully. Thank you for reaching out!';
+    } catch (error) {
+      formStatus.dataset.state = 'error';
+      formStatus.textContent = 'Your message could not be sent right now. Please try again or email adilanwartester95@gmail.com.';
+    } finally {
+      submitButton.disabled = false;
+      submitButton.innerHTML = originalButtonMarkup;
+      contactForm.removeAttribute('aria-busy');
+    }
+  });
+}
