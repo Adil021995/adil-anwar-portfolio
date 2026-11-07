@@ -916,3 +916,10 @@
   .hero .mobile-glow-dot-ten{animation:mobileGlowDrift 8s ease-in-out -1.5s infinite}
 }
 
+/* Accessible inline status for AJAX contact submissions */
+.contact-form .form-status{margin:0;padding:11px 13px;border:1px solid rgba(252,48,3,.34);background:rgba(252,48,3,.06);color:#e8ded8;font-size:11px;line-height:1.6}
+.contact-form .form-status[hidden]{display:none}
+.contact-form .form-status[data-state="success"]{border-color:rgba(116,190,139,.45);background:rgba(63,143,91,.09);color:#c3e7cd}
+.contact-form .form-status[data-state="error"]{border-color:rgba(252,48,3,.6);background:rgba(252,48,3,.09);color:#ffad99}
+.contact-form .form-submit:disabled{cursor:wait;opacity:.72;transform:none;box-shadow:none}
+
