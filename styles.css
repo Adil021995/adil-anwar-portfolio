@@ -887,3 +887,32 @@
   .experience-card .experience-skills span{width:100%;min-width:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px 5px;font-size:8px;line-height:1.35}
 }
 
+/* Replace wide mobile orbit rings with small, low-cost moving glow points */
+@keyframes mobileGlowDrift{0%,100%{translate:0 0;opacity:.68}50%{translate:7px -10px;opacity:1}}
+@media(max-width:760px){
+  .hero .hero-visual .orbit{display:none!important}
+  .hero .mobile-glow-dot{position:absolute;z-index:0;display:block;width:6px;height:6px;border-radius:50%;background:#ff6a4b;box-shadow:0 0 8px 2px rgba(252,48,3,.5),0 0 20px 5px rgba(252,48,3,.2);pointer-events:none}
+  .hero .mobile-glow-dot-one{top:20%;left:9%}
+  .hero .mobile-glow-dot-two{top:34%;right:7%}
+  .hero .mobile-glow-dot-three{bottom:27%;left:8%}
+  .hero .mobile-glow-dot-four{right:12%;bottom:18%;width:5px;height:5px}
+  .hero .mobile-glow-dot-five{top:8%;left:47%;width:4px;height:4px}
+  .hero .mobile-glow-dot-six{top:51%;right:1%;width:5px;height:5px}
+  .hero .mobile-glow-dot-seven{bottom:43%;left:2%;width:4px;height:4px}
+  .hero .mobile-glow-dot-eight{top:72%;right:4%;width:3px;height:3px}
+  .hero .mobile-glow-dot-nine{bottom:8%;left:35%;width:5px;height:5px}
+  .hero .mobile-glow-dot-ten{top:11%;right:27%;width:3px;height:3px}
+}
+@media(max-width:760px) and (prefers-reduced-motion:no-preference){
+  .hero .mobile-glow-dot-one{animation:mobileGlowDrift 8.5s ease-in-out infinite}
+  .hero .mobile-glow-dot-two{animation:mobileGlowDrift 10.5s ease-in-out -2s infinite reverse}
+  .hero .mobile-glow-dot-three{animation:mobileGlowDrift 9.5s ease-in-out -4s infinite}
+  .hero .mobile-glow-dot-four{animation:mobileGlowDrift 12s ease-in-out -1s infinite reverse}
+  .hero .mobile-glow-dot-five{animation:mobileGlowDrift 11s ease-in-out -3s infinite reverse}
+  .hero .mobile-glow-dot-six{animation:mobileGlowDrift 9s ease-in-out -5s infinite}
+  .hero .mobile-glow-dot-seven{animation:mobileGlowDrift 13s ease-in-out -2.5s infinite reverse}
+  .hero .mobile-glow-dot-eight{animation:mobileGlowDrift 10s ease-in-out -6s infinite}
+  .hero .mobile-glow-dot-nine{animation:mobileGlowDrift 14s ease-in-out -4.5s infinite reverse}
+  .hero .mobile-glow-dot-ten{animation:mobileGlowDrift 8s ease-in-out -1.5s infinite}
+}
+
